@@ -89,17 +89,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     QRReader.scan(result => {
-      copiedText = result;
-      textBoxEle.value = result;
-      textBoxEle.select();
-      scanningEle.style.display = 'none';
-      if (isURL(result)) {
-        dialogOpenBtnElement.style.display = 'inline-block';
+      if (window.childScannedOpened) {
+        window.childScannedOpened.close();
       }
-      dialogElement.classList.remove('app__dialog--hide');
-      dialogOverlayElement.classList.remove('app__dialog--hide');
-      const frame = document.querySelector('#frame');
-      // if (forSelectedPhotos && frame) frame.remove();
+      window.childScannedOpened = window.open(result, '_blank', 'toolbar=0,location=0,menubar=0');
+      setTimeout(scan, 5000);
     }, forSelectedPhotos);
   }
 
