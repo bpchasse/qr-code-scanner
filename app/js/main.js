@@ -93,7 +93,10 @@ window.addEventListener('DOMContentLoaded', () => {
         window.childScannedOpened.close();
       }
       window.childScannedOpened = window.open(result, '_blank', 'toolbar=0,location=0,menubar=0');
-      setTimeout(scan, 5000);
+      setTimeout(() => {
+        QRReader.init();
+        scan();
+      }, 3000);
     }, forSelectedPhotos);
   }
 
